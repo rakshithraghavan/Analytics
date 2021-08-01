@@ -7,6 +7,7 @@
   x2 <- runif(N)
   d <- as.data.frame(cbind(x1, x2))
   head(d)
+  str(d)
 
 # Loop: create a vector to store the results in
   rowMeanFor <- vector("double", N)

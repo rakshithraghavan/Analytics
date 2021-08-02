@@ -1,11 +1,12 @@
 #K-means clustering on Dataset "Computers".----
-df<-read.csv("F:/rWork/rProjects/AbhiAnalytics/computers_price.csv",header = T)
+setwd("/home/zer0/Downloads/abhi/AbhiAnalytics-master/")
+df<-read.csv("/home/zer0/Downloads/abhi/AbhiAnalytics-master/Computers.csv",header = T)
 View(df)
 
 #In clustering categorical variables are not handled, hence, we have to remove them first
 #removing unwanted columns
 library(dplyr)
-df <- read.csv("computers.csv") %>%
+df <- read.csv("Computers.csv") %>%
   select(-c(X, cd, multi, premium))
 glimpse(df)
 View(df)
@@ -34,7 +35,12 @@ View(rescale_df)
 #install.packages("animation")
 par(mfcol = c(2, 3))
 set.seed(2345)
+
+#install.packages("animation")
+#Dependencies
+#sudo apt-get install -y libmagick++-dev
 library(animation)
+
 kmeans.ani(rescale_df[2:3], 3)
 
 #The algorithm converged after seven iterations. 
@@ -87,6 +93,7 @@ elbow <-data.frame(2:max_k, wss)
 # We plot to visualize where is the elbow point
 
 #Plot the graph with gglop
+library(ggplot2)
 ggplot(elbow, aes(x = X2.max_k, y = wss)) +
   geom_point() +
   geom_line() +
@@ -115,7 +122,7 @@ rescale_df$CL<-pc_cluster_2$cluster
 View(rescale_df)
 
 #Write dataset with cluster in a csv
-write.csv(rescale_df,"C:/Users/abhinavc.TEEMWURK/Desktop/Analytics Opportunities/Training Material/Training_RCode/computers_clusters.csv")
+#write.csv(rescale_df,"computers_clusters.csv")
 
 #To Unscale a scaled variable, we use the attributes:
 # d$s.x * attr(d$s.x, 'scaled:scale') + attr(d$s.x, 'scaled:center')
